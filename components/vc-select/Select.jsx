@@ -1294,7 +1294,13 @@ const Select = {
             on: getEvents(child),
             class: getClass(child),
           };
-          const menuItem = <MenuItem {...p}>{child.componentOptions.children}</MenuItem>;
+          const menuItem =
+            child.componentOptions.children.length == 1 &&
+            child.componentOptions.children[0].text.replace(/\s/g, '').length == 0 ? (
+              <MenuItem {...p}>&nbsp;</MenuItem>
+            ) : (
+              <MenuItem {...p}>{child.componentOptions.children}</MenuItem>
+            );
           sel.push(menuItem);
           menuItems.push(menuItem);
         }
